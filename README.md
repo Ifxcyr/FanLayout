@@ -18,7 +18,7 @@ app/build.gradle:
 ```
 implementation 'com.wuyr:fanlayout:1.0.0'
 ```
-## [查看文档](https://github.com/Ifxcyr/FanLayout/raw/master/Doc/com/wuyr/fanlayout/FanLayout.html)
+## [查看文档](http://htmlpreview.github.io/?https://github.com/Ifxcyr/FanLayout/blob/master/Doc/com/wuyr/fanlayout/FanLayout.html)
 ### Demo: https://github.com/wuyr/FanLayout
 ### APIs：
 ```
