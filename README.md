@@ -26,19 +26,33 @@ implementation 'com.wuyr:fanlayout:1.0.0'
         android:id="@+id/fan_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        
         app:auto_select="true" //滚动完毕是否可以自动选中最近的item 默认: false
+        
         app:bearing_can_roll="true" //轴承是否可以转动 默认: false
+        
         app:bearing_color="#9F55" //轴承颜色(bearing_type=color时才有效) 默认: #000
+        
         app:bearing_gravity="left" //对齐方式：left, right, top, bottom, left_top, left_bottom, right_top, right_bottom 默认: left
+        
         app:bearing_layout="@layout/bearing_view" //自定义的轴承布局 (bearing_type=view时才有效)
+        
         app:bearing_offset="0dp" //轴承偏移量
+        
         app:bearing_on_bottom="true" //轴承是否在最底 默认: false
+        
         app:bearing_radius="50dp" //轴承半径
+        
         app:bearing_type="view" //轴承类型: view, color 默认: color 设置为view时需指定bearing_layout
+        
         app:item_add_direction="clockwise" //item的添加方向:clockwise(顺时针添加), counterclockwise(逆时针), interlaced(交叉) 默认: clockwise
+        
         app:item_angle_offset="20" //固定的偏移角度，当item_layout_mode为fixed时有效
+        
         app:item_direction_fixed="true" //设置item是否保持垂直 默认: false
+        
         app:item_layout_mode="average" //item的布局方式: average(平均), fixed(指定角度) 默认: average 如设置为fixed需指定item_angle_offset
+        
         app:item_offset="0dp" //item偏移量
         />
 ```
