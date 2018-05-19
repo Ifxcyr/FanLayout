@@ -19,7 +19,7 @@ app/build.gradle:
 implementation 'com.wuyr:fanlayout:1.0.0'
 ```
 ## [查看文档](http://htmlpreview.github.io/?https://github.com/Ifxcyr/FanLayout/blob/master/Doc/com/wuyr/fanlayout/FanLayout.html)
-### Demo: https://github.com/wuyr/FanLayout
+
 ### 布局属性：
 ```
     <com.wuyr.FanLayout
@@ -125,4 +125,5 @@ VelocityTracker的惯性滚动利用率 数值越大，惯性滚动的动画时�
 setSelection(int index, boolean isSmooth)
 选中指定的item
 ```
+## Demo: https://github.com/wuyr/FanLayout
 ## 几行代码实现Android弧形滑动 https://github.com/Ifxcyr/ArcSlidingHelper
