@@ -126,5 +126,5 @@ setSelection(int index, boolean isSmooth)
 选中指定的item
 ```
 ## Demo: https://github.com/wuyr/FanLayout
-## 博客详情： https://blog.csdn.net/u011387817/article/details/80390555
+## 博客详情： https://blog.csdn.net/u011387817/article/details/80788704
 ## 几行代码实现Android弧形滑动 https://github.com/Ifxcyr/ArcSlidingHelper
