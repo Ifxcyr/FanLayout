@@ -31,7 +31,7 @@ import java.lang.annotation.RetentionPolicy;
  * GitHub: https://github.com/wuyr/FanLayout
  */
 @SuppressWarnings("unused")
-public class FanLayout extends ViewGroup {
+public class FanLayout extends ViewGroup implements View.OnClickListener, View.OnLongClickListener {
 
     private int mFixingAnimationDuration = 300;//惯性滚动之后，调整位置的动画时长
     private int mRadius;//轴承半径
@@ -66,6 +66,9 @@ public class FanLayout extends ViewGroup {
     private ValueAnimator mAnimator;
     private OnItemSelectedListener mOnItemSelectedListener;
     private OnItemRotateListener mOnItemRotateListener;
+    private OnItemClickListener mOnItemClickListener;
+    private OnItemLongClickListener mOnItemLongClickListener;
+    private OnClickListener mBearingViewOnClickListener;
 
     public FanLayout(Context context) {
         this(context, null);
@@ -611,6 +614,10 @@ public class FanLayout extends ViewGroup {
         if (needAdd) {
             addView(mBearingView);
         }
+        if (!isBearingView(child)) {
+            child.setOnClickListener(this);
+            child.setOnLongClickListener(this);
+        }
     }
 
     @Override
@@ -975,6 +982,7 @@ public class FanLayout extends ViewGroup {
                         }
                     }
                     mBearingView = LayoutInflater.from(getContext()).inflate(mBearingLayoutId, this, false);
+                    mBearingView.setOnClickListener(mBearingViewOnClickListener);
                     addView(mBearingView, isBearingOnBottom ? 0 : -1);
                 }
                 setWillNotDraw(true);
@@ -1053,12 +1061,114 @@ public class FanLayout extends ViewGroup {
         return mCurrentGravity;
     }
 
+    public int getFixingAnimationDuration() {
+        return mFixingAnimationDuration;
+    }
+
+    public int getRadius() {
+        return mRadius;
+    }
+
+    public int getBearingOffset() {
+        return mBearingOffset;
+    }
+
+    public int getItemOffset() {
+        return mItemOffset;
+    }
+
+    public int getItemLayoutMode() {
+        return mItemLayoutMode;
+    }
+
+    public int getItemAddDirection() {
+        return mItemAddDirection;
+    }
+
+    public float getItemAngleOffset() {
+        return mItemAngleOffset;
+    }
+
+    public int getCurrentGravity() {
+        return mCurrentGravity;
+    }
+
+    public boolean isAutoSelect() {
+        return isAutoSelect;
+    }
+
+    public boolean isBearingCanRoll() {
+        return isBearingCanRoll;
+    }
+
+    public boolean isBearingOnBottom() {
+        return isBearingOnBottom;
+    }
+
+    public int getCurrentBearingType() {
+        return mCurrentBearingType;
+    }
+
+    public int getBearingColor() {
+        return mBearingColor;
+    }
+
+    public View getBearingView() {
+        return mBearingView;
+    }
+
     public void setOnItemRotateListener(OnItemRotateListener listener) {
         mOnItemRotateListener = listener;
     }
 
     public void setOnItemSelectedListener(OnItemSelectedListener listener) {
         mOnItemSelectedListener = listener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mOnItemClickListener = listener;
+    }
+
+    public void setOnItemLongClickListener(OnItemLongClickListener listener) {
+        mOnItemLongClickListener = listener;
+    }
+
+    public void setOnBearingClickListener(OnClickListener listener) {
+        if (mBearingView != null) {
+            mBearingView.setOnClickListener(listener);
+        }
+        mBearingViewOnClickListener = listener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener != null) {
+            mOnItemClickListener.onItemClick(v, getIgnoreBearingIndex(v));
+        }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        return mOnItemLongClickListener != null && mOnItemLongClickListener.onItemLongClick(v, getIgnoreBearingIndex(v));
+    }
+
+    private int getIgnoreBearingIndex(View v) {
+        int index = indexOfChild(v);
+        return isHasBottomBearing() ? index - 1 : index;
+    }
+
+    /**
+     * Item被点击的回调
+     */
+    public interface OnItemClickListener {
+        void onItemClick(View view, int index);
+    }
+
+    /**
+     * Item被长按的回调
+     */
+    public interface OnItemLongClickListener {
+        boolean onItemLongClick(View view, int index);
     }
 
     /**
